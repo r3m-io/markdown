@@ -438,28 +438,36 @@ class Markdown {
 
     protected function block_fenced_code_continue(array $line, array $block): ?array
     {
-        if (isset($block['complete'])) {
+
+        if (isset($block['complete']))
+        {
             return null;
         }
-        if (isset($block['interrupted'])) {
+
+        if (isset($block['interrupted']))
+        {
             $block['element']['element']['text'] .= str_repeat("\n", $block['interrupted']);
-//            $block['element']['text']['text'] .= "\n";
+
             unset($block['interrupted']);
         }
-        if (preg_match('/^'.$block['char'].'{3,}[ ]*$/', $line['text'])) {
-            $block['element']['text']['text'] = substr($block['element']['text']['text'], 1);
+
+        if (($len = strspn($line['text'], $block['char'])) >= $block['openerLength']
+            and chop(substr($line['text'], $len), ' ') === ''
+        ) {
+            $block['element']['element']['text'] = substr($block['element']['element']['text'], 1);
+
             $block['complete'] = true;
+
             return $block;
         }
-        d($line);
-        $block['element']['text']['text'] .= "\n".$line['body'];
+
+        $block['element']['element']['text'] .= "\n" . $line['body'];
+
         return $block;
     }
 
     protected function block_fenced_code_complete(array $block): array
     {
-        $text = $block['element']['text']['text'];
-        $block['element']['text']['text'] = $text;
         return $block;
     }
 
