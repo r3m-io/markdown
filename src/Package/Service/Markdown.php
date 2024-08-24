@@ -229,13 +229,13 @@ class Markdown {
                 'text' => $text
             ];
             if (isset($current_block['continuable'])) {
-                $block = $this->{'block'.$current_block['type'].'_continue'}($line, $current_block);
+                $block = $this->{'block_'.$current_block['type'].'_continue'}($line, $current_block);
                 if (isset($block)) {
                     $current_block = $block;
                     continue;
                 } else {
                     if ($this->is_block_completable($current_block['type'])) {
-                        $current_block = $this->{'block'.$current_block['type'].'_complete'}($current_block);
+                        $current_block = $this->{'block_'.$current_block['type'].'_complete'}($current_block);
                     }
                 }
             }
@@ -278,7 +278,7 @@ class Markdown {
             isset($current_block['continuable']) &&
             $this->is_block_completable($current_block['type'])
         ) {
-            $current_block = $this->{'block'.$current_block['type'].'_complete'}($current_block);
+            $current_block = $this->{'block_'.$current_block['type'].'_complete'}($current_block);
         }
         $blocks []= $current_block;
         unset($blocks[0]);
