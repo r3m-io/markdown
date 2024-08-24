@@ -442,7 +442,8 @@ class Markdown {
             return null;
         }
         if (isset($block['interrupted'])) {
-            $block['element']['text']['text'] .= "\n";
+            $block['element']['element']['text'] .= str_repeat("\n", $block['interrupted']);
+//            $block['element']['text']['text'] .= "\n";
             unset($block['interrupted']);
         }
         if (preg_match('/^'.$block['char'].'{3,}[ ]*$/', $line['text'])) {
@@ -450,7 +451,8 @@ class Markdown {
             $block['complete'] = true;
             return $block;
         }
-        $block['element']['text']['text'] .= $line['body'];
+        d($line);
+        $block['element']['text']['text'] .= "\n".$line['body'];
         return $block;
     }
 
