@@ -400,6 +400,18 @@ class Markdown {
 
     protected function block_fenced_code(array $line): ?array
     {
+        $marker = $line['text'][0];
+        $opener_length = strspn($line['text'], $marker);
+
+        if ($opener_length < 3)
+        {
+            return null;
+        }
+        $info_string = trim(substr($line['text'], $opener_length), "\t ");
+        if (strpos($info_string, '`') !== false)
+        {
+            return null;
+        }
         if (preg_match('/^['.$line['text'][0].']{3,}[ ]*([^`]+)?[ ]*$/', $line['text'], $matches)) {
             $element = [
                 'name' => 'code',
@@ -426,6 +438,7 @@ class Markdown {
             }
             return [
                 'char' => $line['text'][0],
+                'opener_length' => $opener_length,
                 'element' => [
                     'name' => 'pre',
                     'handler' => 'element',
@@ -438,31 +451,21 @@ class Markdown {
 
     protected function block_fenced_code_continue(array $line, array $block): ?array
     {
-
-        if (isset($block['complete']))
-        {
+        if (isset($block['complete'])) {
             return null;
         }
-
-        if (isset($block['interrupted']))
-        {
+        if (isset($block['interrupted'])) {
             $block['element']['element']['text'] .= str_repeat("\n", $block['interrupted']);
-
             unset($block['interrupted']);
         }
-
-        if (($len = strspn($line['text'], $block['char'])) >= $block['openerLength']
+        if (($len = strspn($line['text'], $block['char'])) >= $block['opener_length']
             and chop(substr($line['text'], $len), ' ') === ''
         ) {
             $block['element']['element']['text'] = substr($block['element']['element']['text'], 1);
-
             $block['complete'] = true;
-
             return $block;
         }
-
         $block['element']['element']['text'] .= "\n" . $line['body'];
-
         return $block;
     }
 
