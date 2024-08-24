@@ -27,6 +27,12 @@ class Markdown {
 
         # convert to markup
         $markup = $this->elements($Elements);
+        $markup = str_replace("{
+
+
+
+
+", '{', $markup);
         d($markup);
         # trim line breaks
         $markup = trim($markup, "\n");
