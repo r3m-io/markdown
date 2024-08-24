@@ -27,10 +27,9 @@ class Markdown {
 
         # convert to markup
         $markup = $this->elements($Elements);
-
+        d($markup);
         # trim line breaks
         $markup = trim($markup, "\n");
-
         return $markup;
     }
 
