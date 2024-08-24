@@ -31,7 +31,6 @@ class Markdown {
 
 
 
-
 ", '{', $markup);
         d($markup);
         # trim line breaks
