@@ -390,7 +390,7 @@ class Markdown {
             $text = substr($Line['body'], 4);
 
             $Block['element']['element']['text'] .= $text;
-
+d($Block);
             return $Block;
         }
     }
@@ -524,8 +524,6 @@ class Markdown {
 
             return $Block;
         }
-        d($Line);
-
         $Block['element']['element']['text'] .= "\n" . $Line['body'];
 
         return $Block;
