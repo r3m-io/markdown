@@ -91,9 +91,9 @@ class Markdown {
 
     protected string $inline_marker_list = '!"*_&[:<>`~\\';
 
-    protected bool $breaks_enabled;
+    protected bool $breaks_enabled = true;
 
-    protected bool $markup_escaped;
+    protected bool $markup_escaped = false;
 
     protected bool $url_linked = true;
 
