@@ -1785,6 +1785,7 @@ class Markdown {
             d($autoBreak);
             $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
             $autoBreak = $autoBreakNext;
+            d($markup);
         }
 
         $markup .= $autoBreak ? "\n" : '';
