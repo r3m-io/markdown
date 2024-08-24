@@ -191,7 +191,7 @@ class Markdown {
     ];
 
     protected array $unmarked_block_type = [
-        'Code',
+        'code',
     ];
 
     #
@@ -247,7 +247,7 @@ class Markdown {
                 }
             }
             foreach ($block_type as $blockType) {
-                $block = $this->{'block'.$blockType}($line, $current_block);
+                $block = $this->{'block_'.$blockType}($line, $current_block);
                 if (isset($block)) {
                     $block['type'] = $blockType;
                     if ( ! isset($block['identified'])) {
