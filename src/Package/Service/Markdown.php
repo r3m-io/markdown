@@ -200,6 +200,7 @@ class Markdown {
 
     protected function lines(array $lines): string
     {
+        d($lines);
         $current_block = null;
         foreach ($lines as $line) {
             if (chop($line) === '') {
@@ -998,7 +999,7 @@ class Markdown {
         ) {
             return [
                 'markup' => $excerpt['text'][1],
-                'extent' => 1, //was 2
+                'extent' => 2,
             ];
         }
         return null;
