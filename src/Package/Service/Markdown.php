@@ -441,8 +441,7 @@ class Markdown {
                 'opener_length' => $opener_length,
                 'element' => [
                     'name' => 'pre',
-                    'handler' => 'element',
-                    'text' => $element,
+                    'element' => $element,
                 ],
             ];
         }
