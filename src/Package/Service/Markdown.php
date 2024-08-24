@@ -1009,7 +1009,9 @@ class Markdown {
             in_array($excerpt['text'][1], $this->special_characters, true)
         ) {
             return [
-                'markup' => $excerpt['text'][1],
+                'element' => [
+                    'raw_html' => $excerpt['text'][1]
+                ],
                 'extent' => 2,
             ];
         }
@@ -1106,7 +1108,9 @@ class Markdown {
             preg_match('/^<\/\w[\w-]*[ ]*>/s', $excerpt['text'], $matches)
         ) {
             return [
-                'markup' => $matches[0],
+                'element' => [
+                    'raw_html' => $matches[0],
+                ],
                 'extent' => strlen($matches[0]),
             ];
         }
@@ -1115,7 +1119,9 @@ class Markdown {
             preg_match('/^<!---?[^>-](?:-?[^-])*-->/s', $excerpt['text'], $matches)
         ) {
             return [
-                'markup' => $matches[0],
+                'element' => [
+                    'raw_html' => $matches[0],
+                ],
                 'extent' => strlen($matches[0]),
             ];
         }
@@ -1124,7 +1130,9 @@ class Markdown {
             preg_match('/^<\w[\w-]*(?:[ ]*'.$this->regex_html_attribute.')*[ ]*\/?>/s', $excerpt['text'], $matches)
         ) {
             return [
-                'markup' => $matches[0],
+                'element' => [
+                    'raw_html' => $matches[0],
+                ],
                 'extent' => strlen($matches[0]),
             ];
         }
@@ -1138,7 +1146,9 @@ class Markdown {
             ! preg_match('/^&#?\w+;/', $excerpt['text'])
         ) {
             return [
-                'markup' => '&amp;',
+                'element' => [
+                    'raw_html' => '&amp;'
+                ],
                 'extent' => 1,
             ];
         }
@@ -1147,10 +1157,11 @@ class Markdown {
             '<' => 'lt',
             '"' => 'quot'
         ];
-        if (isset($special_character[$excerpt['text'][0]]))
-        {
+        if (isset($special_character[$excerpt['text'][0]])) {
             return [
-                'markup' => '&' . $special_character[$excerpt['text'][0]].';',
+                'element' => [
+                    'raw_html' => '&' . $special_character[$excerpt['text'][0]].';'
+                ],
                 'extent' => 1,
             ];
         }
@@ -1259,16 +1270,16 @@ class Markdown {
                 $markup .= ' '.$name.'="'.self::escape($value).'"';
             }
         }
-        $permitRawHtml = false;
+        $permit_raw_html = false;
         if (isset($element['text'])) {
             $text = $element['text'];
         }
         // very strongly consider an alternative if you're writing an
         // extension
-        elseif (isset($element['rawHtml'])) {
-            $text = $element['rawHtml'];
+        elseif (isset($element['raw_html'])) {
+            $text = $element['raw_html'];
             $allow_raw_html_in_safe_mode = isset($element['allow_raw_html_in_safe_mode']) && $element['allow_raw_html_in_safe_mode'];
-            $permitRawHtml = !$this->safe_mode || $allow_raw_html_in_safe_mode;
+            $permit_raw_html = !$this->safe_mode || $allow_raw_html_in_safe_mode;
         }
 
         if (isset($text)) {
@@ -1280,10 +1291,9 @@ class Markdown {
             if (isset($element['handler'])) {
                 $markup .= $this->{$element['handler']}($text, $element['non_nestables']);
             }
-            elseif (!$permitRawHtml) {
+            elseif (!$permit_raw_html) {
                 $markup .= self::escape($text, true);
-            }
-            else {
+            } else {
                 $markup .= $text;
             }
             $markup .= '</'.$element['name'].'>';
