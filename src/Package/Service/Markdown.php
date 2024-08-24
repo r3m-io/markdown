@@ -263,8 +263,8 @@ class Markdown {
             }
             if (
                 isset($current_block) && !
-                isset($current_block['type']) && !
-                isset($current_block['interrupted'])
+                isset($current_block['type']) &&
+                ! isset($current_block['interrupted'])
             ) {
                 $current_block['element']['text'] .= "\n".$text;
             } else {
@@ -998,7 +998,7 @@ class Markdown {
         ) {
             return [
                 'markup' => $excerpt['text'][1],
-                'extent' => 2,
+                'extent' => 1, //was 2
             ];
         }
         return null;
@@ -1013,21 +1013,21 @@ class Markdown {
             return null;
         }
         $excerpt['text']= substr($excerpt['text'], 1);
-        $Link = $this->inline_link($excerpt);
-        if ($Link === null) {
+        $link = $this->inline_link($excerpt);
+        if ($link === null) {
             return null;
         }
         $inline = [
-            'extent' => $Link['extent'] + 1,
+            'extent' => $link['extent'] + 1,
             'element' => [
                 'name' => 'img',
                 'attributes' => [
-                    'src' => $Link['element']['attributes']['href'],
-                    'alt' => $Link['element']['text'],
+                    'src' => $link['element']['attributes']['href'],
+                    'alt' => $link['element']['text'],
                 ],
             ],
         ];
-        $inline['element']['attributes'] += $Link['element']['attributes'];
+        $inline['element']['attributes'] += $link['element']['attributes'];
         unset($inline['element']['attributes']['href']);
         return $inline;
     }
@@ -1151,7 +1151,10 @@ class Markdown {
             return;
         }
 
-        if ($excerpt['text'][1] === '~' && preg_match('/^~~(?=\S)(.+?)(?<=\S)~~/', $excerpt['text'], $matches))
+        if (
+            $excerpt['text'][1] === '~' &&
+            preg_match('/^~~(?=\S)(.+?)(?<=\S)~~/', $excerpt['text'], $matches)
+        )
         {
             return array(
                 'extent' => strlen($matches[0]),
