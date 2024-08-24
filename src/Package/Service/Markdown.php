@@ -887,7 +887,7 @@ class Markdown {
                 ) {
                     continue;
                 }
-                $inline = $this->{'inline'.$inline_type}($excerpt_array);
+                $inline = $this->{'inline_'.$inline_type}($excerpt_array);
                 if ( ! isset($inline)) {
                     continue;
                 }
