@@ -1784,11 +1784,15 @@ class Markdown {
             );
             // (autobreak === false) covers both sides of an element
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
-            d($autoBreak);
-            d($Element);
-            $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
+            if(
+                isset($Element['name']) &&
+                in_array($Element['name'], ['pre', 'code'])
+            ){
+                $markup .= $this->element($Element);
+            } else {
+                $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
+            }
             $autoBreak = $autoBreakNext;
-            d($markup);
         }
 
         $markup .= $autoBreak ? "\n" : '';
