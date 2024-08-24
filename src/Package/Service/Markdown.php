@@ -1,5 +1,5 @@
 <?php
-namespace R3m\Io\Markdown;
+namespace Package\R3m\Io\Markdown\Service;
 
 #
 #
