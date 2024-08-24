@@ -1259,6 +1259,10 @@ class Markdown {
         if ($this->safe_mode) {
             $element = $this->sanitise_element($element);
         }
+        if(!array_key_exists('name', $element)){
+            trace();
+            ddd($element);
+        }
         $markup = '<'.$element['name'];
 
         if (isset($element['attributes'])) {
