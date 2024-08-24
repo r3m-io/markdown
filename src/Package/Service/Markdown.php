@@ -436,7 +436,7 @@ class Markdown {
         return null;
     }
 
-    protected function block_fenced_code_continue(string $line, array $block): ?array
+    protected function block_fenced_code_continue(array $line, array $block): ?array
     {
         if (isset($block['complete'])) {
             return null;
