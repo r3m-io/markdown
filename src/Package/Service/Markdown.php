@@ -381,7 +381,7 @@ class Markdown {
         {
             if (isset($Block['interrupted']))
             {
-                $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']);
+//                $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']);
 
                 unset($Block['interrupted']);
             }
