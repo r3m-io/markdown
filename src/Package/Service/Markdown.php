@@ -510,7 +510,7 @@ class Markdown {
 
         if (isset($Block['interrupted']))
         {
-//            $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']);
+            $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']);
 
             unset($Block['interrupted']);
         }
@@ -524,6 +524,7 @@ class Markdown {
 
             return $Block;
         }
+        d($Line);
 
         $Block['element']['element']['text'] .= "\n" . $Line['body'];
 
