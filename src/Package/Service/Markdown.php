@@ -27,12 +27,6 @@ class Markdown {
 
         # convert to markup
         $markup = $this->elements($Elements);
-        $markup = str_replace("{
-
-
-
-", '{', $markup);
-        d($markup);
         # trim line breaks
         $markup = trim($markup, "\n");
         return $markup;
@@ -390,7 +384,6 @@ class Markdown {
             $text = substr($Line['body'], 4);
 
             $Block['element']['element']['text'] .= $text;
-d($Block);
             return $Block;
         }
     }
@@ -1789,13 +1782,13 @@ d($Block);
             );
             // (autobreak === false) covers both sides of an element
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
-
+            d($autoBreak);
             $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
             $autoBreak = $autoBreakNext;
         }
 
         $markup .= $autoBreak ? "\n" : '';
-
+d($markup);
         return $markup;
     }
 
