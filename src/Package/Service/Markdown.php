@@ -240,7 +240,6 @@ class Markdown {
                 }
             }
             $marker = $text[0];
-            d($marker);
             $block_type = $this->unmarked_block_type;
             if (isset($this->block_type[$marker])) {
                 foreach ($this->block_type[$marker] as $blockType) {
@@ -451,7 +450,7 @@ class Markdown {
             $block['complete'] = true;
             return $block;
         }
-        $block['element']['text']['text'] .= "\n".$line['body'];
+        $block['element']['text']['text'] .= $line['body'];
         return $block;
     }
 
