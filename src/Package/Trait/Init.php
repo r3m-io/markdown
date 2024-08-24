@@ -1,5 +1,5 @@
 <?php
-namespace Package\R3m\Io\Server\Trait;
+namespace Package\R3m\Io\Markdown\Trait;
 
 use R3m\Io\App;
 
