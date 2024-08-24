@@ -200,7 +200,6 @@ class Markdown {
 
     protected function lines(array $lines): string
     {
-        d($lines);
         $current_block = null;
         foreach ($lines as $line) {
             if (chop($line) === '') {
@@ -241,6 +240,7 @@ class Markdown {
                 }
             }
             $marker = $text[0];
+            d($marker);
             $block_type = $this->unmarked_block_type;
             if (isset($this->block_type[$marker])) {
                 foreach ($this->block_type[$marker] as $blockType) {
