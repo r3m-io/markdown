@@ -20,7 +20,7 @@ class Markdown {
         //flags: App::flags($object)
         $ldelim = Core::uuid();
         $rdelim = Core::uuid();
-        $string = str_replace(['{{', '}}'], [$ldelim, $rdelim], $string);
+        $string = str_replace(['{', '}'], [$ldelim, $rdelim], $string);
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
