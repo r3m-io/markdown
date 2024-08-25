@@ -311,6 +311,7 @@ class Markdown {
 
         # ~
 
+        d($Elements);
         return $Elements;
     }
 
