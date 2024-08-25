@@ -1686,7 +1686,7 @@ class Markdown {
         {
             $Element = $this->sanitiseElement($Element);
         }
-
+        $text = null;
         # identity map if element has no handler
         $Element = $this->handle($Element);
 
