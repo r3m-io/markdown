@@ -519,13 +519,12 @@ class Markdown {
             return $Block;
         }
         $Block['element']['element']['text'] .= "\n" . $Line['body'];
-        d($Block);
         return $Block;
     }
 
     protected function blockFencedCodeComplete($Block)
     {
-//        d($Block);
+        d($Block);
         return $Block;
     }
 
