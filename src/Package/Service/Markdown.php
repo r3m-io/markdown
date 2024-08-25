@@ -1222,7 +1222,7 @@ class Markdown {
                 $Element['autobreak'] = false;
             }
         }
-
+d($Elements);
         return $Elements;
     }
 
@@ -1245,7 +1245,6 @@ class Markdown {
             ),
             $text
         );
-        d($Inline);
         return $Inline;
     }
 
