@@ -856,7 +856,7 @@ class Markdown {
         }
 
         $Block['element']['rawHtml'] .= "\n" . $Line['body'];
-
+        d($Block);
         return $Block;
     }
 
@@ -1265,7 +1265,6 @@ class Markdown {
                     'text' => $text,
                 ),
             );
-            d($code);
             return $code;
         }
     }
