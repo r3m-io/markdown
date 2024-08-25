@@ -289,6 +289,7 @@ class Markdown {
                 }
 
                 $CurrentBlock = $this->paragraph($Line);
+                d($CurrentBlock);
 
                 $CurrentBlock['identified'] = true;
             }
