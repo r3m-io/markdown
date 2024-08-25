@@ -741,6 +741,7 @@ class Markdown {
 
     protected function blockQuote($Line)
     {
+        d($Line);
         if (preg_match('/^>[ ]?+(.*+)/', $Line['text'], $matches))
         {
             $Block = array(
@@ -1959,7 +1960,7 @@ d($markup);
     # Read-Only
 
     protected $specialCharacters = array(
-        '\\', '`', '*', '_', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '|', '~'
+        '\\', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '|', '~'
     );
 
     protected $StrongRegex = array(
