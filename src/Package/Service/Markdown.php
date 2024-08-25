@@ -289,7 +289,6 @@ class Markdown {
                 }
 
                 $CurrentBlock = $this->paragraph($Line);
-                d($CurrentBlock);
 
                 $CurrentBlock['identified'] = true;
             }
@@ -301,6 +300,7 @@ class Markdown {
         {
             $methodName = 'block' . $CurrentBlock['type'] . 'Complete';
             $CurrentBlock = $this->$methodName($CurrentBlock);
+            d($currentBlock);
         }
 
         # ~
