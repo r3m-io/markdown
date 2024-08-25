@@ -518,7 +518,7 @@ class Markdown {
             return $Block;
         }
         $Block['element']['element']['text'] .= "\n" . $Line['body'];
-
+d($Block);
         return $Block;
     }
 
@@ -843,7 +843,6 @@ class Markdown {
                     'autobreak' => true,
                 ),
             );
-d($Block);
             return $Block;
         }
     }
