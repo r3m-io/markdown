@@ -311,7 +311,7 @@ class Markdown {
 
         # ~
 
-        d($Elements);
+//        d($Elements);
         return $Elements;
     }
 
@@ -524,7 +524,7 @@ class Markdown {
 
     protected function blockFencedCodeComplete($Block)
     {
-        d($Block);
+//        d($Block);
         return $Block;
     }
 
@@ -1783,6 +1783,7 @@ class Markdown {
         }
 
         $markup .= $autoBreak ? "\n" : '';
+        d($markup);
         return $markup;
     }
 
