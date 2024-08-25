@@ -1752,6 +1752,7 @@ class Markdown {
                 if (!$permitRawHtml)
                 {
                     $markup .= self::escape($text, true);
+                    d($markup);
                 }
                 else
                 {
