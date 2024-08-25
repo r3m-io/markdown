@@ -519,6 +519,7 @@ class Markdown {
             return $Block;
         }
         $Block['element']['element']['text'] .= "\n" . $Line['body'];
+        d($Block);
         return $Block;
     }
 
