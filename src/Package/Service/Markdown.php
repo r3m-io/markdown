@@ -504,8 +504,7 @@ class Markdown {
 
         if (isset($Block['interrupted']))
         {
-//            $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']); // @2024-08-25 disabled
-
+            $Block['element']['element']['text'] .= str_repeat("\n", $Block['interrupted']);
             unset($Block['interrupted']);
         }
 
@@ -518,8 +517,7 @@ class Markdown {
 
             return $Block;
         }
-        $Block['element']['element']['text'] = $Line['body'];
-//        $Block['element']['element']['text'] .= "\n" . $Line['body']; //@2024-08-25 disabled
+        $Block['element']['element']['text'] .= "\n" . $Line['body'];
         return $Block;
     }
 
@@ -1093,7 +1091,7 @@ class Markdown {
         }
 
         $Block['element']['handler']['argument'] .= "\n".$Line['text'];
-
+d($Block);
         return $Block;
     }
 
