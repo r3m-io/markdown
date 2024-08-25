@@ -1856,7 +1856,7 @@ d($markup);
     function parse($text)
     {
         $markup = $this->text($text);
-
+        $markup = str_replace('{ ' . "\n " . "\n " . "\n ", '{', $markup);
         return $markup;
     }
 
@@ -1985,7 +1985,7 @@ d($markup);
     protected $textLevelElements = array(
         'a', 'br', 'bdo', 'abbr', 'blink', 'nextid', 'acronym', 'basefont',
         'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
-        'i', 'rp', 'del',                  'strike', 'marquee',
+        'i', 'rp', 'del', 'code',          'strike', 'marquee',
         'q', 'rt', 'ins', 'font',          'strong',
         's', 'tt', 'kbd', 'mark',
         'u', 'xm', 'sub', 'nobr',
