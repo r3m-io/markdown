@@ -741,7 +741,6 @@ class Markdown {
 
     protected function blockQuote($Line)
     {
-        d($Line);
         if (preg_match('/^>[ ]?+(.*+)/', $Line['text'], $matches))
         {
             $Block = array(
@@ -1259,13 +1258,15 @@ class Markdown {
             $text = $matches[2];
             $text = preg_replace('/[ ]*+\n/', ' ', $text);
 
-            return array(
+            $code = array(
                 'extent' => strlen($matches[0]),
                 'element' => array(
                     'name' => 'code',
                     'text' => $text,
                 ),
             );
+            d($code);
+            return $code;
         }
     }
 
