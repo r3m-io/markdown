@@ -5,7 +5,8 @@
     "keywords" : ["node", "r3m", "library", "framework", "markdown", "r3m.io"],
     "homepage": "https://r3m.io",
     "require" : {
-        "r3m_io/framework": "*"
+        "r3m_io/framework": "*",
+        "league/commonmark": "^2.5.3"
     },
     "license" : "MIT",
     "authors" : [{
