@@ -1778,7 +1778,8 @@ class Markdown {
             );
             // (autobreak === false) covers both sides of an element
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
-            $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
+//            $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
+            $markup .= $this->element($Element);
             $autoBreak = $autoBreakNext;
             d($this->element($Element));
             d($markup);
