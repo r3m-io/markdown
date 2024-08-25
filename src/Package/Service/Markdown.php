@@ -1245,7 +1245,7 @@ class Markdown {
             ),
             $text
         );
-
+        d($Inline);
         return $Inline;
     }
 
@@ -1257,8 +1257,6 @@ class Markdown {
         {
             $text = $matches[2];
             $text = preg_replace('/[ ]*+\n/', ' ', $text);
-
-            d($text);
             $code = array(
                 'extent' => strlen($matches[0]),
                 'element' => array(
