@@ -25,7 +25,7 @@ class Markdown {
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
-        $string = $converter->convert($string);
-        return str_replace([$ldelim, $rdelim], ['{{', '}}'], $string);
+        return $converter->convert($string);
+//        return str_replace([$ldelim, $rdelim], ['{{', '}}'], $string);
     }
 }
