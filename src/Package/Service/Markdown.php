@@ -1782,7 +1782,7 @@ class Markdown {
             $markup .= $this->element($Element);
             $autoBreak = $autoBreakNext;
         }
-        $markup .= $autoBreak ? "\n" : '';
+//        $markup .= $autoBreak ? "\n" : ''; //@2024-08-25 disabled
         return $markup;
     }
 
