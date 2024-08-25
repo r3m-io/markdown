@@ -843,7 +843,7 @@ class Markdown {
                     'autobreak' => true,
                 ),
             );
-
+d($Block);
             return $Block;
         }
     }
@@ -1222,7 +1222,6 @@ class Markdown {
                 $Element['autobreak'] = false;
             }
         }
-d($Elements);
         return $Elements;
     }
 
