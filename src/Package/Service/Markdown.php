@@ -1737,6 +1737,7 @@ class Markdown {
             if (isset($Element['elements']))
             {
                 $markup .= $this->elements($Element['elements']);
+                d($markup);
             }
             elseif (isset($Element['element']))
             {
