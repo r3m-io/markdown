@@ -1781,7 +1781,9 @@ class Markdown {
 //            $markup .= ($autoBreak ? "\n" : '') . $this->element($Element); //@2024-08-25 disabled
             $markup .= $this->element($Element);
             $autoBreak = $autoBreakNext;
+            d($markup);
         }
+
 //        $markup .= $autoBreak ? "\n" : ''; //@2024-08-25 disabled
         return $markup;
     }
