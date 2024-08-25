@@ -1920,6 +1920,7 @@ d($markup);
 
     protected static function escape($text, $allowQuotes = false)
     {
+        return $text;
         return htmlspecialchars($text, $allowQuotes ? ENT_NOQUOTES : ENT_QUOTES, 'UTF-8');
     }
 
