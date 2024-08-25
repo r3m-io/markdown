@@ -1806,7 +1806,7 @@ d($markup);
     {
         $Elements = $this->linesElements($lines);
 
-        if ( ! in_array('', $lines)
+        if ( ! in_array('', $lines, true)
             and isset($Elements[0]) and isset($Elements[0]['name'])
             and $Elements[0]['name'] === 'p'
         ) {
@@ -1920,7 +1920,6 @@ d($markup);
 
     protected static function escape($text, $allowQuotes = false)
     {
-        return $text;
         return htmlspecialchars($text, $allowQuotes ? ENT_NOQUOTES : ENT_QUOTES, 'UTF-8');
     }
 
@@ -1986,7 +1985,7 @@ d($markup);
     protected $textLevelElements = array(
         'a', 'br', 'bdo', 'abbr', 'blink', 'nextid', 'acronym', 'basefont',
         'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
-        'i', 'rp', 'del', 'code',          'strike', 'marquee',
+        'i', 'rp', 'del',                  'strike', 'marquee',
         'q', 'rt', 'ins', 'font',          'strong',
         's', 'tt', 'kbd', 'mark',
         'u', 'xm', 'sub', 'nobr',
