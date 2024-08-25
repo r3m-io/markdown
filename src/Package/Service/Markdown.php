@@ -1684,7 +1684,6 @@ class Markdown {
     protected function element(array $Element)
     {
         d($Element);
-        d($this->safeMode);
         if ($this->safeMode)
         {
             $Element = $this->sanitiseElement($Element);
@@ -1692,7 +1691,7 @@ class Markdown {
         $text = null;
         # identity map if element has no handler
         $Element = $this->handle($Element);
-
+        d($Element);
         $hasName = isset($Element['name']);
 
         $markup = '';
