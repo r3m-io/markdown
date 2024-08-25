@@ -1258,6 +1258,7 @@ class Markdown {
             $text = $matches[2];
             $text = preg_replace('/[ ]*+\n/', ' ', $text);
 
+            d($text);
             $code = array(
                 'extent' => strlen($matches[0]),
                 'element' => array(
@@ -1683,7 +1684,6 @@ class Markdown {
 
     protected function element(array $Element)
     {
-        d($Element);
         if ($this->safeMode)
         {
             $Element = $this->sanitiseElement($Element);
@@ -1691,7 +1691,6 @@ class Markdown {
         $text = null;
         # identity map if element has no handler
         $Element = $this->handle($Element);
-        d($Element);
         $hasName = isset($Element['name']);
 
         $markup = '';
@@ -1739,20 +1738,16 @@ class Markdown {
             if (isset($Element['elements']))
             {
                 $markup .= $this->elements($Element['elements']);
-                d($markup);
             }
             elseif (isset($Element['element']))
             {
-                d($markup);
                 $markup .= $this->element($Element['element']);
-                d($markup);
             }
             else
             {
                 if (!$permitRawHtml)
                 {
                     $markup .= self::escape($text, true);
-                    d($markup);
                 }
                 else
                 {
@@ -1766,8 +1761,6 @@ class Markdown {
         {
             $markup .= ' />';
         }
-        d($permitRawHtml);
-        d($markup);
         return $markup;
     }
 
@@ -1777,7 +1770,6 @@ class Markdown {
 
         $autoBreak = true;
 
-        d($Elements);
         foreach ($Elements as $Element)
         {
             if (empty($Element))
@@ -1792,11 +1784,9 @@ class Markdown {
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
             $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
             $autoBreak = $autoBreakNext;
-            d($markup);
         }
 
         $markup .= $autoBreak ? "\n" : '';
-d($markup);
         return $markup;
     }
 
