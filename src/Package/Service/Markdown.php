@@ -1765,7 +1765,7 @@ class Markdown {
         {
             $markup .= ' />';
         }
-
+        d($markup);
         return $markup;
     }
 
@@ -1790,7 +1790,6 @@ class Markdown {
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
             $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
             $autoBreak = $autoBreakNext;
-            trace();
             d($markup);
         }
 
