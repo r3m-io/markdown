@@ -1765,6 +1765,7 @@ class Markdown {
         {
             $markup .= ' />';
         }
+        d($permitRawHtml);
         d($markup);
         return $markup;
     }
