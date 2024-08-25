@@ -1856,7 +1856,6 @@ d($markup);
     function parse($text)
     {
         $markup = $this->text($text);
-        $markup = str_replace('{ ' . "\n " . "\n " . "\n ", '{', $markup);
         return $markup;
     }
 
