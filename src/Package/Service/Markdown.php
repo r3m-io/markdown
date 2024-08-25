@@ -1680,7 +1680,7 @@ class Markdown {
         return $Elements;
     }
 
-    protected function element(array $Element, $autoBreak=true)
+    protected function element(array $Element)
     {
         if ($this->safeMode)
         {
@@ -1736,12 +1736,12 @@ class Markdown {
 
             if (isset($Element['elements']))
             {
-                $markup .= $this->elements($Element['elements'], $autoBreak);
+                $markup .= $this->elements($Element['elements']);
             }
             elseif (isset($Element['element']))
             {
                 d($markup);
-                $markup .= $this->element($Element['element'], $autoBreak);
+                $markup .= $this->element($Element['element']);
                 d($markup);
             }
             else
@@ -1766,10 +1766,12 @@ class Markdown {
         return $markup;
     }
 
-    protected function elements(array $Elements, $autoBreak=true)
+    protected function elements(array $Elements)
     {
         $markup = '';
-        $old_autoBreak = null;
+
+        $autoBreak = true;
+
         foreach ($Elements as $Element)
         {
             if (empty($Element))
@@ -1777,22 +1779,17 @@ class Markdown {
                 continue;
             }
 
-            $autoBreakNext = ($Element['autobreak'] ?? isset($Element['name'])
+            $autoBreakNext = (isset($Element['autobreak'])
+                ? $Element['autobreak'] : isset($Element['name'])
             );
             // (autobreak === false) covers both sides of an element
             $autoBreak = !$autoBreak ? $autoBreak : $autoBreakNext;
-            if(
-                isset($Element['name']) &&
-                in_array($Element['name'], ['pre', 'code'])
-            ){
-                $autoBreak = false;
-            }
-            $markup .= $this->element($Element, $autoBreak);
+            $markup .= ($autoBreak ? "\n" : '') . $this->element($Element);
             $autoBreak = $autoBreakNext;
-
+            d($markup);
         }
 
-//        $markup .= $autoBreak ? "\n" : '';
+        $markup .= $autoBreak ? "\n" : '';
 d($markup);
         return $markup;
     }
