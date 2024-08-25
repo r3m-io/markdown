@@ -1683,6 +1683,8 @@ class Markdown {
 
     protected function element(array $Element)
     {
+        d($Element);
+        d($this->safeMode);
         if ($this->safeMode)
         {
             $Element = $this->sanitiseElement($Element);
