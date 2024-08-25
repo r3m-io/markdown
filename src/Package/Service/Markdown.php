@@ -298,9 +298,10 @@ class Markdown {
 
         if (isset($CurrentBlock['continuable']) and $this->isBlockCompletable($CurrentBlock['type']))
         {
+            d($CurrentBlock);
             $methodName = 'block' . $CurrentBlock['type'] . 'Complete';
             $CurrentBlock = $this->$methodName($CurrentBlock);
-            d($currentBlock);
+            d($CurrentBlock);
         }
 
         # ~
