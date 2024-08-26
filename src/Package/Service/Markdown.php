@@ -162,6 +162,7 @@ class Markdown {
                 $is_value = false;
                 $anchor = false;
                 $collect = [];
+                $record = [];
             }
             elseif(
                 $char == 'a' &&
