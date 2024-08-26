@@ -34,19 +34,46 @@ class Markdown {
         $comment_start = Core::uuid();
         $comment_end = Core::uuid();
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
-        $string = Markdown::allow_anchor($object, $string);
         $anchor_start = Core::uuid();
         $anchor_end_start = Core::uuid();
         $anchor_end = Core::uuid();
-        $string = str_replace(['<a', '</a', '>'], [$anchor_start, $anchor_end_start, $anchor_end], $string);
+        $anchor_double_quote = Core::uuid();
+        $anchor_single_quote = Core::uuid();
+        $string = Markdown::anchor(
+            $object,
+            $string,
+            [
+                'anchor_start' => $anchor_start,
+                'anchor_end_start' => $anchor_end_start,
+                'anchor_end' => $anchor_end,
+                'anchor_double_quote' => $anchor_double_quote,
+                'anchor_single_quote' => $anchor_single_quote,
+            ]
+        );
         $string = $converter->convert($string);
         $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
-        $string =  str_replace([$anchor_start, $anchor_end_start, $anchor_end], ['<a', '</a', '>'], $string);
+        $string =  str_replace(
+            [
+                $anchor_start,
+                $anchor_end_start,
+                $anchor_end,
+                $anchor_double_quote,
+                $anchor_single_quote
+            ],
+            [
+                '<a',
+                '</a',
+                '>',
+                '"',
+                '\''
+            ],
+            $string
+        );
         ddd($string);
         return str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
     }
 
-    public static function allow_anchor($object, $string=''): string
+    public static function anchor($object, $string='', $options=[]): string
     {
         d($string);
         $data = mb_str_split($string, 1);
@@ -101,6 +128,12 @@ class Markdown {
                     } else {
                         if($collect_value === '='){
                             //nothing
+                        }
+                        elseif($collect_value === '"'){
+                            $value .= $options['anchor_double_quote'];
+                        }
+                        elseif($collect_value === '\''){
+                            $value .= $options['anchor_single_quote'];
                         } else {
                             $value .= $collect_value;
                         }
@@ -119,13 +152,13 @@ class Markdown {
                 for($i = $is_tag; $i <= $nr; $i++){
                     $data[$i] = null;
                 }
-                $data[$is_tag] = '<a';
+                $data[$is_tag] = $options['anchor_start'];
                 foreach($safe_record as $attribute => $value){
                     if($value){
                         $data[$is_tag] .= ' ' . $attribute . '=' . $value;
                     }
                 }
-                $data[$is_tag] .= '>';
+                $data[$is_tag] .= $options['anchor_end'];
                 $is_tag = false;
                 $is_value = false;
                 $anchor = false;
@@ -143,7 +176,8 @@ class Markdown {
                 $collect[] = $char;
             }
         }
-        return implode('', $data);
+        $string = implode('', $data);
+        return $string;
     }
 
     public static function apply_anchor($object, $string=''): string
