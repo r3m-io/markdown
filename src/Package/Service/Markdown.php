@@ -94,7 +94,7 @@ class Markdown {
                     ){
                         $key .= $collect_value;
                     } elseif(
-                        $collect_value !== '' &&
+                        $collect_value !== ' ' &&
                         $is_single_quote === false &&
                         $is_double_quote === false
                     ){
