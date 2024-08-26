@@ -47,6 +47,7 @@ class Markdown {
         $anchor = false;
         $is_tag = false;
         $collect = [];
+        $record = [];
         foreach($data as $nr => $char){
             $previous = $data[$nr - 1] ?? null;
             $next = $data[$nr + 1] ?? null;
@@ -63,7 +64,6 @@ class Markdown {
                 $key = '';
                 $is_single_quote = false;
                 $is_double_quote = false;
-                $record = [];
                 foreach($collect as $collect_nr => $collect_value){
                     if($collect_value === '"'){
                         $is_double_quote = true;
@@ -113,7 +113,6 @@ class Markdown {
                         $record[$key] = $value;
                     }
                 }
-                ddd($record);
             }
             elseif(
                 $char == 'a' &&
@@ -127,6 +126,7 @@ class Markdown {
                 $collect[] = $char;
             }
         }
+        ddd($record);
         return $string;
     }
 
