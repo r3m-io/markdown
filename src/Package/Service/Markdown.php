@@ -70,7 +70,7 @@ class Markdown {
             $string
         );
         $string = str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
-//        $string = str_replace(['<p><a ', '</p>'], ['<!--', '-->'], $string);
+        $string = str_replace(['<p><a ', '</a></p>'], ['<a', '</a>'], $string);
         return $string;
     }
 
