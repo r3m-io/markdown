@@ -33,9 +33,9 @@ class Markdown {
         $environment->addExtension(new AttributesExtension());
         $converter = new MarkdownConverter($environment);
         $comment_start = Core::uuid();
-        $commend_end = Core::uuid();
-        $string = str_replace(['<!--', '-->'], [$comment_start, $commend_end], $string);
+        $comment_end = Core::uuid();
+        $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
         $string = $converter->convert($string);
-        $string = str_replace([$comment_start, $commend_end], ['<!--', '-->'], $string);
+        return str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
     }
 }
