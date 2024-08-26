@@ -123,6 +123,8 @@ class Markdown {
                 }
                 $is_tag = false;
                 $is_value = false;
+                $anchor = false;
+                $collect = [];
                 ddd($data);
             }
             elseif(
