@@ -75,7 +75,6 @@ class Markdown {
 
     public static function anchor($object, $string='', $options=[]): string
     {
-        d($string);
         $data = mb_str_split($string, 1);
         $anchor = false;
         $is_tag = false;
