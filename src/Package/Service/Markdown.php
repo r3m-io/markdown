@@ -22,7 +22,6 @@ class Markdown {
     {
         //options: App::options($object)
         //flags: App::flags($object)
-
         $config = [
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
@@ -37,7 +36,6 @@ class Markdown {
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
         $string = $converter->convert($string);
         $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
-        $string =  str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
-        return $string;
+        return str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
     }
 }
