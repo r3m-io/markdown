@@ -60,7 +60,7 @@ class Markdown {
                 $is_tag === true
             ){
                 $is_tag = false;
-                dddd($collect);
+                ddd($collect);
             }
             elseif(
                 $char == 'a' &&
