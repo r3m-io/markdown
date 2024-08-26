@@ -83,7 +83,6 @@ class Markdown {
                         $is_value = false;
                         if($key !== ''){
                             $record[$key] = $value;
-                            ddd($record);
                         }
                         $key = '';
                         $value = '';
@@ -109,6 +108,7 @@ class Markdown {
                         $record[$key] = $value;
                     }
                 }
+                ddd($record);
             }
             elseif(
                 $char == 'a' &&
@@ -122,7 +122,6 @@ class Markdown {
                 $collect[] = $char;
             }
         }
-        ddd($record);
         return $string;
     }
 
