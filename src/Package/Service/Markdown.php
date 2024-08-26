@@ -48,11 +48,9 @@ class Markdown {
         $is_tag = false;
         $collect = [];
         foreach($data as $nr => $char){
-            if(
-                $char == '<' &&
-                $is_tag === false &&
-                $anchor === false
-            ){
+            $previous = $data[$nr - 1] ?? null;
+            $next = $data[$nr + 1] ?? null;
+            if($char == '<'){
                 $is_tag = true;
             }
             elseif(
@@ -60,7 +58,7 @@ class Markdown {
                 $is_tag === true
             ){
                 $is_tag = false;
-                ddd($collect);
+                d($collect);
             }
             elseif(
                 $char == 'a' &&
