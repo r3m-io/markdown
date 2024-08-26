@@ -3,6 +3,8 @@ namespace Package\R3m\Io\Markdown\Service;
 
 use R3m\Io\App;
 
+use R3m\Io\Module\Core;
+
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -30,6 +32,10 @@ class Markdown {
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
         $environment->addExtension(new AttributesExtension());
         $converter = new MarkdownConverter($environment);
-        return $converter->convert($string);
+        $comment_start = Core::uuid();
+        $commend_end = Core::uuid();
+        $string = str_replace(['<!--', '-->'], [$comment_start, $commend_end], $string);
+        $string = $converter->convert($string);
+        $string = str_replace([$comment_start, $commend_end], ['<!--', '-->'], $string);
     }
 }
