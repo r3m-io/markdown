@@ -69,8 +69,8 @@ class Markdown {
             ],
             $string
         );
-        ddd($string);
-        return str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
+        $string = str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
+        $string = str_replace(['<p><a ', '</p>'], ['<!--', '-->'], $string);
     }
 
     public static function anchor($object, $string='', $options=[]): string
@@ -177,6 +177,7 @@ class Markdown {
             }
         }
         $string = implode('', $data);
+        d($string);
         return $string;
     }
 
