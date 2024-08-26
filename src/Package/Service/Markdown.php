@@ -118,7 +118,7 @@ class Markdown {
             }
             elseif(
                 $char == 'a' &&
-                $is_tag === true &&
+                $is_tag !== false &&
                 $anchor === false
             ){
                 $anchor = true;
