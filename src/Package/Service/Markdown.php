@@ -80,18 +80,31 @@ class Markdown {
                         $is_double_quote === false
                     ){
                         $is_value = false;
-                        $record[$key] = $value;
+                        if($key !== ''){
+                            $record[$key] = $value;
+                        }
                         $key = '';
                         $value = '';
                     }
-                    if($is_value === false){
+                    if(
+                        $is_value === false &&
+                        $collect_value !== ' ' &&
+                        $is_single_quote === false &&
+                        $is_double_quote === false
+                    ){
                         $key .= $collect_value;
-                    } else {
+                    } elseif(
+                        $collect_value !== '' &&
+                        $is_single_quote === false &&
+                        $is_double_quote === false
+                    ){
                         $value .= $collect_value;
                     }
                 }
                 if($is_value === true){
-                    $record[$key] = $value;
+                    if($key !== ''){
+                        $record[$key] = $value;
+                    }
                 }
                 ddd($record);
             }
