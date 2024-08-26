@@ -36,6 +36,8 @@ class Markdown {
         $comment_end = Core::uuid();
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
         $string = $converter->convert($string);
-        return str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
+        $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
+        ddd($string);
+        return $string;
     }
 }
