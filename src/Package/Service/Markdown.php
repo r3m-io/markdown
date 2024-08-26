@@ -121,12 +121,10 @@ class Markdown {
                     }
                 }
                 $data[$is_tag] .= '>';
-                ddd($data[$is_tag]);
                 $is_tag = false;
                 $is_value = false;
                 $anchor = false;
                 $collect = [];
-
             }
             elseif(
                 $char == 'a' &&
@@ -140,7 +138,7 @@ class Markdown {
                 $collect[] = $char;
             }
         }
-        return $string;
+        return implode('', $data);
     }
 
     public static function apply_anchor($object, $string=''): string
