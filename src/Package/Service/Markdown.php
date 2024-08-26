@@ -84,6 +84,7 @@ class Markdown {
                         if($key !== ''){
                             $record[$key] = $value;
                         }
+                        ddd($record);
                         $key = '';
                         $value = '';
                     }
@@ -114,7 +115,6 @@ class Markdown {
                         $record[$key] = $value;
                     }
                 }
-                ddd($record);
             }
             elseif(
                 $char == 'a' &&
