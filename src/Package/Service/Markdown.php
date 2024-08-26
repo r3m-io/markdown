@@ -70,7 +70,7 @@ class Markdown {
             $string
         );
         $string = str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
-        $string = str_replace(['<p><a ', '</a></p>'], ['<a', '</a>'], $string);
+        $string = str_replace(['<p><a', '</a></p>'], ['<a', '</a>'], $string);
         return $string;
     }
 
@@ -152,7 +152,7 @@ class Markdown {
                 for($i = $is_tag; $i <= $nr; $i++){
                     $data[$i] = null;
                 }
-                $data[$is_tag] = $options['anchor_start'] . ' ';
+                $data[$is_tag] = $options['anchor_start'];
                 foreach($safe_record as $attribute => $value){
                     if($value){
                         $data[$is_tag] .= ' ' . $attribute . '=' . $value;
