@@ -95,7 +95,17 @@ class Markdown {
                             $key .= $collect_value;
                         }
                     } else {
-                        $value .= $collect_value;
+                        if($collect_value === '='){
+                            //nothing
+                        }
+                        elseif($collect_value === '"'){
+                            //nothing
+                        }
+                        elseif($collect_value === '\''){
+                          //nothing
+                        } else {
+                            $value .= $collect_value;
+                        }
                     }
                 }
                 if($is_value === true){
