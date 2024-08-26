@@ -37,7 +37,7 @@ class Markdown {
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
         $string = $converter->convert($string);
         $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
-        ddd($string);
+        d($string);
         return $string;
     }
 }
