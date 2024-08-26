@@ -90,6 +90,9 @@ class Markdown {
                         $value .= $collect_value;
                     }
                 }
+                if($is_value === true){
+                    $record[$key] = $value;
+                }
                 ddd($record);
             }
             elseif(
