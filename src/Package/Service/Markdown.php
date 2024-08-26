@@ -35,9 +35,14 @@ class Markdown {
         $comment_end = Core::uuid();
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
         $string = Markdown::allow_anchor($object, $string);
+        $anchor_start = Core::uuid();
+        $anchor_end_start = Core::uuid();
+        $anchor_end = Core::uuid();
+        $string = str_replace(['<a', '</a', '>'], [$anchor_start, $anchor_end_start, $anchor_end], $string);
         $string = $converter->convert($string);
         $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
-        $string = Markdown::apply_anchor($object, $string);
+        $string =  str_replace([$anchor_start, $anchor_end_start, $anchor_end], ['<a', '</a', '>'], $string);
+        ddd($string);
         return str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
     }
 
