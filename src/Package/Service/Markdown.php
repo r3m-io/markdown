@@ -70,7 +70,8 @@ class Markdown {
             $string
         );
         $string = str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
-        $string = str_replace(['<p><a ', '</p>'], ['<!--', '-->'], $string);
+//        $string = str_replace(['<p><a ', '</p>'], ['<!--', '-->'], $string);
+        return $string;
     }
 
     public static function anchor($object, $string='', $options=[]): string
