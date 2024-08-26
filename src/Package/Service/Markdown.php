@@ -119,8 +119,8 @@ class Markdown {
                     if($value){
                         $data[$is_tag] .= ' ' . $attribute . '=' . $value;
                     }
-                    $data[$is_tag] .= '>';
                 }
+                $data[$is_tag] .= '>';
                 ddd($data[$is_tag]);
                 $is_tag = false;
                 $is_value = false;
