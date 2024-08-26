@@ -88,16 +88,13 @@ class Markdown {
                     }
                     if(
                         $is_value === false &&
-                        $collect_value !== ' ' &&
                         $is_single_quote === false &&
                         $is_double_quote === false
                     ){
-                        $key .= $collect_value;
-                    } elseif(
-                        $collect_value !== ' ' &&
-                        $is_single_quote === false &&
-                        $is_double_quote === false
-                    ){
+                        if($collect_value !== ' '){
+                            $key .= $collect_value;
+                        }
+                    } else {
                         $value .= $collect_value;
                     }
                 }
