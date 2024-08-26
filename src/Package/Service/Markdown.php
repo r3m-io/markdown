@@ -51,11 +51,11 @@ class Markdown {
             $previous = $data[$nr - 1] ?? null;
             $next = $data[$nr + 1] ?? null;
             if($char == '<'){
-                $is_tag = true;
+                $is_tag = $nr;
             }
             elseif(
                 $char == '>' &&
-                $is_tag === true
+                $is_tag !== false
             ){
                 $is_tag = false;
                 $is_value = false;
