@@ -84,7 +84,6 @@ class Markdown {
                         if($key !== ''){
                             $record[$key] = $value;
                         }
-                        ddd($record);
                         $key = '';
                         $value = '';
                     }
@@ -99,12 +98,6 @@ class Markdown {
                     } else {
                         if($collect_value === '='){
                             //nothing
-                        }
-                        elseif($collect_value === '"'){
-                            //nothing
-                        }
-                        elseif($collect_value === '\''){
-                          //nothing
                         } else {
                             $value .= $collect_value;
                         }
@@ -128,6 +121,7 @@ class Markdown {
                 $collect[] = $char;
             }
         }
+        ddd($record);
         return $string;
     }
 
