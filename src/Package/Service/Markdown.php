@@ -178,7 +178,6 @@ class Markdown {
             }
         }
         $string = implode('', $data);
-        d($string);
         return $string;
     }
 
