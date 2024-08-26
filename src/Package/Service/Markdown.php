@@ -59,8 +59,6 @@ class Markdown {
                 $char == '>' &&
                 $is_tag !== false
             ){
-                $is_tag = false;
-                $is_value = false;
                 $value = '';
                 $key = '';
                 $is_single_quote = false;
@@ -108,7 +106,24 @@ class Markdown {
                         $record[$key] = $value;
                     }
                 }
-                ddd($record);
+                $safe_record = [
+                    'id' => $record['id'] ?? null,
+                    'href' => $record['href'] ?? null,
+                    'title' => $record['title'] ?? null,
+                ];
+                for($i = $is_tag; $i <= $nr; $i++){
+                    $data[$i] = null;
+                }
+                $data[$is_tag] = '<a';
+                foreach($safe_record as $attribute => $value){
+                    if($value){
+                        $data[$is_tag] .= ' ' . $attribute . '=' . $value;
+                    }
+                    $data[$is_tag] .= '>';
+                }
+                $is_tag = false;
+                $is_value = false;
+                ddd($data);
             }
             elseif(
                 $char == 'a' &&
