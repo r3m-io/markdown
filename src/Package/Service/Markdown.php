@@ -108,11 +108,12 @@ class Markdown {
                         }
                     }
                 }
-                if($is_value === true){
-                    if($key !== ''){
+                if($is_value === true) {
+                    if ($key !== '') {
                         $record[$key] = $value;
                     }
                 }
+                ddd($record);
             }
             elseif(
                 $char == 'a' &&
@@ -126,7 +127,6 @@ class Markdown {
                 $collect[] = $char;
             }
         }
-        ddd($record);
         return $string;
     }
 
