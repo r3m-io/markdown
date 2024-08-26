@@ -166,6 +166,7 @@ class Markdown {
                 $record = [];
             }
             elseif(
+                $previous !== '/' &&
                 $char == 'a' &&
                 $is_tag !== false &&
                 $anchor === false
