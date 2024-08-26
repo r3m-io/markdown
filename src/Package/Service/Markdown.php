@@ -121,11 +121,12 @@ class Markdown {
                     }
                     $data[$is_tag] .= '>';
                 }
+                ddd($data[$is_tag]);
                 $is_tag = false;
                 $is_value = false;
                 $anchor = false;
                 $collect = [];
-                ddd($data);
+
             }
             elseif(
                 $char == 'a' &&
