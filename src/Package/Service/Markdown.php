@@ -83,6 +83,7 @@ class Markdown {
                         $is_value = false;
                         if($key !== ''){
                             $record[$key] = $value;
+                            ddd($record);
                         }
                         $key = '';
                         $value = '';
