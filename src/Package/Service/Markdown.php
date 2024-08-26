@@ -43,6 +43,7 @@ class Markdown {
 
     public static function allow_anchor($object, $string=''): string
     {
+        d($string);
         $data = mb_str_split($string, 1);
         $anchor = false;
         $is_tag = false;
