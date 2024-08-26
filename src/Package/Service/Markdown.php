@@ -34,8 +34,51 @@ class Markdown {
         $comment_start = Core::uuid();
         $comment_end = Core::uuid();
         $string = str_replace(['<!--', '-->'], [$comment_start, $comment_end], $string);
+        $string = Markdown::allow_anchor($object, $string);
         $string = $converter->convert($string);
         $string =  str_replace([$comment_start, $comment_end], ['<!--', '-->'], $string);
+        $string = Markdown::apply_anchor($object, $string);
         return str_replace(['<p><!--', '--></p>'], ['<!--', '-->'], $string);
     }
+
+    public static function allow_anchor($object, $string=''): string
+    {
+        $data = mb_str_split($string, 1);
+        $anchor = false;
+        $is_tag = false;
+        $collect = [];
+        foreach($data as $nr => $char){
+            if(
+                $char == '<' &&
+                $is_tag === false &&
+                $anchor === false
+            ){
+                $is_tag = true;
+            }
+            elseif(
+                $char == '>' &&
+                $is_tag === true
+            ){
+                $is_tag = false;
+                dddd($collect);
+            }
+            elseif(
+                $char == 'a' &&
+                $is_tag === true &&
+                $anchor === false
+            ){
+                $anchor = true;
+            }
+            if($anchor){
+                $collect[] = $char;
+            }
+        }
+        return $string;
+    }
+
+    public static function apply_anchor($object, $string=''): string
+    {
+        return $string;
+    }
+
 }
