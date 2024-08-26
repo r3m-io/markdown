@@ -58,7 +58,39 @@ class Markdown {
                 $is_tag === true
             ){
                 $is_tag = false;
-                d($collect);
+                $is_value = false;
+                $value = '';
+                $key = '';
+                $is_single_quote = false;
+                $is_double_quote = false;
+                $record = [];
+                foreach($collect as $collect_nr => $collect_value){
+                    if($collect_value === '"'){
+                        $is_double_quote = true;
+                    }
+                    elseif($collect_value === '\''){
+                        $is_single_quote = true;
+                    }
+                    elseif($collect_value === '='){
+                        $is_value = true;
+                    }
+                    elseif(
+                        $collect_value === ' ' &&
+                        $is_single_quote === false &&
+                        $is_double_quote === false
+                    ){
+                        $is_value = false;
+                        $record[$key] = $value;
+                        $key = '';
+                        $value = '';
+                    }
+                    if($is_value === false){
+                        $key .= $collect_value;
+                    } else {
+                        $value .= $collect_value;
+                    }
+                }
+                ddd($record);
             }
             elseif(
                 $char == 'a' &&
@@ -66,6 +98,7 @@ class Markdown {
                 $anchor === false
             ){
                 $anchor = true;
+                continue;
             }
             if($anchor){
                 $collect[] = $char;
