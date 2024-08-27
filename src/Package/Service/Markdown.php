@@ -79,91 +79,101 @@ class Markdown {
         $data = mb_str_split($string, 1);
         $anchor = false;
         $is_tag = false;
+        $is_close_tag = false;
+        $is_value = false;
         $collect = [];
         $record = [];
         foreach($data as $nr => $char){
             $previous = $data[$nr - 1] ?? null;
             $next = $data[$nr + 1] ?? null;
-            if($char == '<'){
+            if(
+                $char == '<'
+            ){
                 $is_tag = $nr;
             }
             elseif(
                 $char == '>' &&
                 $is_tag !== false
             ){
-                $value = '';
-                $key = '';
-                $is_single_quote = false;
-                $is_double_quote = false;
-                foreach($collect as $collect_nr => $collect_value){
-                    if($collect_value === '"'){
-                        $is_double_quote = true;
-                    }
-                    elseif($collect_value === '\''){
-                        $is_single_quote = true;
-                    }
-                    elseif($collect_value === '='){
-                        $is_value = true;
-                    }
-                    elseif(
-                        $collect_value === ' ' &&
-                        $is_single_quote === false &&
-                        $is_double_quote === false
-                    ){
-                        $is_value = false;
-                        if($key !== ''){
-                            $record[$key] = $value;
-                        }
-                        $key = '';
-                        $value = '';
-                    }
-                    if(
-                        $is_value === false &&
-                        $is_single_quote === false &&
-                        $is_double_quote === false
-                    ){
-                        if($collect_value !== ' '){
-                            $key .= $collect_value;
-                        }
-                    } else {
-                        if($collect_value === '='){
-                            //nothing
-                        }
-                        elseif($collect_value === '"'){
-                            $value .= $options['anchor_double_quote'];
+                if($is_close_tag === false){
+                    $value = '';
+                    $key = '';
+                    $is_single_quote = false;
+                    $is_double_quote = false;
+                    foreach($collect as $collect_nr => $collect_value){
+                        if($collect_value === '"'){
+                            $is_double_quote = true;
                         }
                         elseif($collect_value === '\''){
-                            $value .= $options['anchor_single_quote'];
+                            $is_single_quote = true;
+                        }
+                        elseif($collect_value === '='){
+                            $is_value = true;
+                        }
+                        elseif(
+                            $collect_value === ' ' &&
+                            $is_single_quote === false &&
+                            $is_double_quote === false
+                        ){
+                            $is_value = false;
+                            if($key !== ''){
+                                $record[$key] = $value;
+                            }
+                            $key = '';
+                            $value = '';
+                        }
+                        if(
+                            $is_value === false &&
+                            $is_single_quote === false &&
+                            $is_double_quote === false
+                        ){
+                            if($collect_value !== ' '){
+                                $key .= $collect_value;
+                            }
                         } else {
-                            $value .= $collect_value;
+                            if($collect_value === '='){
+                                //nothing
+                            }
+                            elseif($collect_value === '"'){
+                                $value .= $options['anchor_double_quote'];
+                            }
+                            elseif($collect_value === '\''){
+                                $value .= $options['anchor_single_quote'];
+                            } else {
+                                $value .= $collect_value;
+                            }
                         }
                     }
-                }
-                if($is_value === true) {
-                    if ($key !== '') {
-                        $record[$key] = $value;
+                    if($is_value === true) {
+                        if ($key !== '') {
+                            $record[$key] = $value;
+                        }
                     }
-                }
-                $safe_record = [
-                    'id' => $record['id'] ?? null,
-                    'href' => $record['href'] ?? null,
-                    'title' => $record['title'] ?? null,
-                ];
-                for($i = $is_tag; $i <= $nr; $i++){
-                    $data[$i] = null;
-                }
-                $data[$is_tag] = $options['anchor_start'];
-                foreach($safe_record as $attribute => $value){
-                    if($value){
-                        $data[$is_tag] .= ' ' . $attribute . '=' . $value;
+                } else {
+                    $safe_record = [
+                        'id' => $record['id'] ?? null,
+                        'href' => $record['href'] ?? null,
+                        'title' => $record['title'] ?? null,
+                    ];
+                    for($i = $is_tag; $i <= $nr; $i++){
+                        $data[$i] = null;
                     }
+                    $data[$is_tag] = $options['anchor_start'];
+                    foreach($safe_record as $attribute => $value){
+                        if($value){
+                            $data[$is_tag] .= ' ' . $attribute . '=' . $value;
+                        }
+                    }
+                    d($data[$is_tag]);
+                    ddd($data[$is_close_tag]);
+                    $data[$is_tag] .= $options['anchor_end'];
+                    $is_tag = false;
+                    $is_close_tag = false;
+                    $is_value = false;
+                    $anchor = false;
+                    $collect = [];
+                    $record = [];
                 }
-                $data[$is_tag] .= $options['anchor_end'];
-                $is_tag = false;
-                $is_value = false;
-                $anchor = false;
-                $collect = [];
-                $record = [];
             }
             elseif(
                 $previous !== '/' &&
@@ -174,6 +184,13 @@ class Markdown {
             ){
                 $anchor = true;
                 continue;
+            }
+            elseif(
+                $char === '/' &&
+                $previous === '<' &&
+                $next === 'a'
+            ){
+                $is_close_tag = $nr;
             }
             if($anchor){
                 $collect[] = $char;
