@@ -149,13 +149,16 @@ class Markdown {
                             $record[$key] = $value;
                         }
                     }
+                    for($i = $is_tag; $i <= $nr; $i++){
+                        $data[$i] = null;
+                    }
                 } else {
                     $safe_record = [
                         'id' => $record['id'] ?? null,
                         'href' => $record['href'] ?? null,
                         'title' => $record['title'] ?? null,
                     ];
-                    for($i = $is_tag; $i <= $nr; $i++){
+                    for($i = $is_close_tag; $i <= $nr; $i++){
                         $data[$i] = null;
                     }
                     $data[$is_tag] = $options['anchor_start'];
@@ -164,9 +167,8 @@ class Markdown {
                             $data[$is_tag] .= ' ' . $attribute . '=' . $value;
                         }
                     }
-                    d($data[$is_tag]);
-                    ddd($data[$is_close_tag]);
                     $data[$is_tag] .= $options['anchor_end'];
+                    $data[$is_close_tag] = $options['anchor_end_start'] . $options['anchor_end'];
                     $is_tag = false;
                     $is_close_tag = false;
                     $is_value = false;
