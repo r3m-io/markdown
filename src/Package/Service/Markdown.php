@@ -183,6 +183,8 @@ class Markdown {
                         }
                     }
                     $data[$is_tag] .= $options['anchor_end'];
+
+                    d($data[$is_tag]);
                     $data[$is_close_tag] = $options['anchor_end_start'] . $options['anchor_end'];
                     /*
                     for($i = $is_tag + 1; $i < $is_close_tag; $i++){
