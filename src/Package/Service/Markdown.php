@@ -39,6 +39,7 @@ class Markdown {
         $anchor_end = Core::uuid();
         $anchor_double_quote = Core::uuid();
         $anchor_single_quote = Core::uuid();
+        $anchor_is = Core::uuid();
         $string = Markdown::anchor(
             $object,
             $string,
@@ -48,6 +49,7 @@ class Markdown {
                 'anchor_end' => $anchor_end,
                 'anchor_double_quote' => $anchor_double_quote,
                 'anchor_single_quote' => $anchor_single_quote,
+                'anchor_is' => $anchor_is
             ]
         );
         $string = $converter->convert($string);
@@ -58,14 +60,16 @@ class Markdown {
                 $anchor_end_start,
                 $anchor_end,
                 $anchor_double_quote,
-                $anchor_single_quote
+                $anchor_single_quote,
+                $anchor_is
             ],
             [
                 '<a',
                 '</a',
                 '>',
                 '"',
-                '\''
+                '\'',
+                '='
             ],
             $string
         );
@@ -175,7 +179,7 @@ class Markdown {
                     $data[$is_tag] = $options['anchor_start'];
                     foreach($safe_record as $attribute => $value){
                         if($value){
-                            $data[$is_tag] .= ' ' . $attribute . '=' . $value;
+                            $data[$is_tag] .= ' ' . $attribute . $options['anchor_is'] . $value;
                         }
                     }
                     $data[$is_tag] .= $options['anchor_end'];
