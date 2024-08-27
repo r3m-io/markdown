@@ -88,9 +88,9 @@ class Markdown {
             $next = $data[$nr + 1] ?? null;
             $next_next = $data[$nr + 2] ?? null;
             if(
-                $char === '/' &&
-                $previous === '<' &&
-                $next === 'a'
+                $char === '<' &&
+                $next === '/' &&
+                $next_next === 'a'
             ){
                 $is_close_tag = $nr;
             }
