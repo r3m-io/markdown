@@ -172,6 +172,7 @@ class Markdown {
                         'id' => $record['id'] ?? null,
                         'href' => $record['href'] ?? null,
                         'title' => $record['title'] ?? null,
+                        'target' => $record['target'] ?? null,
                     ];
                     for($i = $is_close_tag; $i <= $nr; $i++){
                         $data[$i] = null;
