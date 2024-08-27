@@ -86,6 +86,7 @@ class Markdown {
         foreach($data as $nr => $char){
             $previous = $data[$nr - 1] ?? null;
             $next = $data[$nr + 1] ?? null;
+            $next_next = $data[$nr + 2] ?? null;
             if(
                 $char === '/' &&
                 $previous === '<' &&
@@ -94,7 +95,10 @@ class Markdown {
                 $is_close_tag = $nr;
             }
             elseif(
-                $char == '<'
+                $char == '<' &&
+                $next === 'a' &&
+                $next_next === ' ' &&
+                $is_tag === false
             ){
                 $is_tag = $nr;
             }
