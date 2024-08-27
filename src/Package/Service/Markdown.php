@@ -160,7 +160,7 @@ class Markdown {
                             $record[$key] = $value;
                         }
                     }
-                    for($i = $is_tag + 1; $i <= $nr; $i++){
+                    for($i = $is_tag; $i <= $nr; $i++){
                         $data[$i] = null;
                     }
                 } else {
@@ -180,10 +180,11 @@ class Markdown {
                     }
                     $data[$is_tag] .= $options['anchor_end'];
                     $data[$is_close_tag] = $options['anchor_end_start'] . $options['anchor_end'];
-
+                    /*
                     for($i = $is_tag + 1; $i < $is_close_tag; $i++){
                         d($data[$i]);
                     }
+                    */
                     $is_tag = false;
                     $is_close_tag = false;
                     $is_value = false;
