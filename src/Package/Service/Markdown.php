@@ -120,6 +120,7 @@ class Markdown {
                         }
                         elseif($collect_value === '='){
                             $is_value = true;
+                            $value .= $collect_value;
                         }
                         elseif(
                             $collect_value === ' ' &&
