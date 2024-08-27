@@ -179,9 +179,10 @@ class Markdown {
                     }
                     $data[$is_tag] = $options['anchor_start'];
                     foreach($safe_record as $attribute => $value){
-                        if($value){
-                            $data[$is_tag] .= ' ' . $attribute . $options['anchor_is'] . $value;
+                        if($value === null) {
+                            continue;
                         }
+                        $data[$is_tag] .= ' ' . $attribute . $options['anchor_is'] . $value;
                     }
                     $data[$is_tag] .= $options['anchor_end'];
                     $data[$is_close_tag] = $options['anchor_end_start'] . $options['anchor_end'];
