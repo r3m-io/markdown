@@ -167,7 +167,8 @@ class Markdown {
             }
             elseif(
                 $previous !== '/' &&
-                $char == 'a' &&
+                $char === 'a' &&
+                $next === ' ' &&
                 $is_tag !== false &&
                 $anchor === false
             ){
@@ -179,6 +180,7 @@ class Markdown {
             }
         }
         $string = implode('', $data);
+        ddd($string);
         return $string;
     }
 
