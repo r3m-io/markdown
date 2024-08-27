@@ -162,6 +162,7 @@ class Markdown {
                     if($is_value === true) {
                         if ($key !== '') {
                             $record[$key] = $value;
+                            d($key);
                         }
                     }
                     for($i = $is_tag; $i <= $nr; $i++){
