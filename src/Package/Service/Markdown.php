@@ -164,8 +164,8 @@ class Markdown {
                             $data[$is_tag] .= ' ' . $attribute . '=' . $value;
                         }
                     }
-//                    d($data[$is_tag]);
-//                    d($data[$is_close_tag]);
+                    d($data[$is_tag]);
+                    ddd($data[$is_close_tag]);
                     $data[$is_tag] .= $options['anchor_end'];
                     $is_tag = false;
                     $is_close_tag = false;
