@@ -61,7 +61,6 @@ class Markdown {
                 $anchor_end,
                 $anchor_double_quote,
                 $anchor_single_quote,
-                $anchor_is
             ],
             [
                 '<a',
@@ -69,7 +68,6 @@ class Markdown {
                 '>',
                 '"',
                 '\'',
-                '='
             ],
             $string
         );
